@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  color: #222;
+  font-family:Arial, Helvetica, sans-serif;
+}
+body {
+  background-color: #777;
+}
+.game{
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(197, 81, 60);
+}
+.menu {
+  display: flex;
+  justify-content:space-around;
+}
+input[type="button"] {
+  font-size: larger;
+  width: 150px;
+  padding: 8px 2px;
+  margin: 10px 5px;
+  background-color: rgb(173, 201, 230);
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 1px rgb(34, 26, 55);
+  transition: 0.1s;
+}
+input[type="button"]:hover {
+  cursor: pointer;
+  background-color: rgb(115, 163, 214);
+  transform:translateY(1px);
+  box-shadow: 0 0px 2px 1px #222;
+}
+input[type="button"]:active {
+  transform:translateY(3px);
+  box-shadow: 0 0px 2px 1px #222;
+}
+input:focus {
+  outline: none;
+}
+#timer {
+  font-size:x-large;
+  text-align: center;
+  width: 150px;
+  background-color: rgb(221, 190, 255);
+  border: 1px solid #333;
+  border-radius: 50px;
+  cursor:default;
+}
+.score {
+  display: flex;
+  justify-content:space-around;
+  padding-top: 10px;
+}
+#score {
+  width: 150px;
+  font-size: x-large;
+  text-align: center;
+  background-color: rgb(221, 190, 255);
+  border: 1px solid #333;
+  border-radius: 50px;
+  cursor:default;
+}
+.screen {
+  max-width: 95%;
+  height: 80%;
+  border: 2px solid;
+  border-radius: 10px;
+  margin: 0 auto;
+  background-color: rgb(93, 107, 108);
+  cursor:cell;
+}
+.target {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 2px solid;
+  border-radius: 50px;
+  background-color: aquamarine;
+}
+.rules {
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background-color: rgb(145, 101, 174);
+  border: 2px solid #222;
+  border-radius: 10px;
+  text-align: center;
+}
+.rules p {
+  text-align: left;
+  padding: 5px 10px 0 10px;
+}
+#rulesCross {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}

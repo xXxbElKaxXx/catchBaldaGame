@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+  <link rel="stylesheet" href="styleIndex.css">
+</head>
+<body>
+  <div class="fullPage">
+    <div class="game">
+      <div class="menu">
+        <input type="button" id="start" value="start | refresh">
+        <input type="button" id="stop" value="stop">
+        <input type="button" id="difficult" value="difficult">
+        <input type="button" id="buttonRules" value="rules">
+      </div>
+      <div class="screen">
+      </div>
+      <div class="score">
+        <input type="text" id="timer" value="timer:" readonly>
+        <input type="text" id="score" value="score:" readonly>
+      </div>
+    </div>
+   <div class="rules">
+     <h2>My life - my rules</h2>
+     <p>Ну что бы тут могло быть не понятно...</p>
+     <p>По Полине жмёшь ЛКМ</p>
+     <p>По Вовану жмёшь ПКМ</p>
+     <p>Если играешь на телефоне -<br>стараешься не попасть по Вовану</p>
+     <p>Кнопка "difficult" пока отдыхает</p>
+     <p>Gl Hf</p>
+     <span id="rulesCross">[x]</span>
+   </div>
+  </div>
+  <div class="Audio">
+    <audio src="click.mp3" id="audioClick"></audio>
+    <audio src="miss.mp3" id="audioMiss"></audio>
+    <audio src="start.mp3" id="audioStart"></audio>
+    <audio src="rules.mp3" id="audioRules"></audio>
+  </div>
+
+  <script>
+
+    let rules = document.querySelector('.rules');
+    let buttonRules = document.getElementById('buttonRules');
+    let rulesCross = document.getElementById('rulesCross');
+    buttonRules.onclick = function() {
+      rules.style.display = 'block';
+      audioRules.play();
+    }
+    rulesCross.onclick = () => rules.style.display = 'none';
+
+    let audioClick = document.getElementById('audioClick');
+    audioClick.volume = 0.3;
+    let audioMiss = document.getElementById('audioMiss');
+    audioMiss.volume = 0.3;
+    let audioRules = document.getElementById('audioRules');
+    audioRules.volume = 0.3;
+    let audioStart = document.getElementById('audioStart');
+    audioStart.volume = 0.3;
+
+    let screen = document.querySelector('.screen');
+
+    let start = document.getElementById('start');
+    start.onclick = startGame;
+
+    let stop = document.getElementById('stop');
+    stop.onclick = stopGame;
+
+    let timer = document.getElementById('timer');
+    let seconds = 0;
+
+    let score = document.getElementById('score');
+    let countScore = 0;
+
+    document.oncontextmenu = function() {
+      return false;
+    };
+
+    function random(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    function startTimer() {
+      seconds = 60;
+      window.timerIdTimer = setInterval(() => {
+        seconds = seconds - 1;
+        timer.value = `timer: ${seconds}`;
+      }, 1000);
+    }
+    
+    function startGame() {
+      audioStart.play();
+      countScore = 0;
+      stopGame();
+      startTimer();
+      window.timerIdGame = setInterval(() => {
+        showTarget();
+        if (seconds == 0) {
+          stopGame();
+        }
+      }, 500);
+    }
+
+    function stopGame() {
+      timer.value = `timer:`;
+      let targets = document.querySelectorAll('.target');
+      for (target of targets) {
+        target.remove()
+      }
+      clearInterval(window.timerIdGame);
+      clearInterval(window.timerIdTimer);
+      screen.onmousedown = null;
+    }
+
+    function showTarget() {
+      let coordsScreen = screen.getBoundingClientRect();
+      let target = document.createElement('div');
+      let coordsTarget = target.getBoundingClientRect();
+      let backgrounds = ['target1.jpg', 'target3.jpg'];
+      let rndBg = Math.floor(Math.random() * 2);
+      target.style.backgroundImage = 'url(' + backgrounds[rndBg] + ')';
+
+      target.className = "target";
+
+      target.style.top = random(coordsScreen.top, coordsScreen.bottom - 50) + 'px';
+
+      target.style.left = random(coordsScreen.left, coordsScreen.right - 50) + 'px';
+
+      screen.append(target);
+
+      target.onmousedown = function(event) {
+        if (event.which == 1 && target.style.backgroundImage == 'url("target1.jpg")') {
+          countScore++;
+          score.value = `score: ${countScore}`;
+          audioClick.play();
+          target.remove();
+        }
+        if (event.which == 1 && target.style.backgroundImage == 'url("target3.jpg")') {
+          countScore--;
+          score.value = `score: ${countScore}`;
+          audioMiss.play();
+        }
+        if (event.which == 3 && target.style.backgroundImage == 'url("target3.jpg")') {
+          countScore++;
+          score.value = `score: ${countScore}`;
+          audioClick.play();
+          target.remove();
+        }
+        if (event.which == 3 && target.style.backgroundImage == 'url("target1.jpg")') {
+          countScore--;
+          score.value = `score: ${countScore}`;
+          audioMiss.play();
+        }
+      }
+      setTimeout(() => target.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
