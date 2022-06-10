@@ -12,7 +12,7 @@ body {
   height: 100vh;
   background-color: rgb(197, 81, 60);
 }
-.menu {
+.buttonMenu {
   display: flex;
   justify-content:space-around;
 }
@@ -41,21 +41,21 @@ input:focus {
   outline: none;
 }
 #timer {
+  width: 150px;
   font-size:x-large;
   text-align: center;
-  width: 150px;
   background-color: rgb(221, 190, 255);
   border: 1px solid #333;
   border-radius: 50px;
   cursor:default;
 }
-.score {
+.scoreMenu {
   display: flex;
+  flex-wrap: wrap;
   justify-content:space-around;
   padding-top: 10px;
 }
 #score {
-  width: 150px;
   font-size: x-large;
   text-align: center;
   background-color: rgb(221, 190, 255);
@@ -72,7 +72,7 @@ input:focus {
   background-color: rgb(93, 107, 108);
   cursor:cell;
 }
-.target {
+.aim {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -99,4 +99,15 @@ input:focus {
   top: 5px;
   right: 5px;
   cursor: pointer;
+}
+.finalAlert {
+  display: none;
+  width: 60vw; 
+  position: fixed;
+  top: 100px;
+  left: 20vw;
+  background-color: rgb(145, 101, 174);
+  border: 2px solid #222;
+  border-radius: 10px;
+  text-align: center;
 }
