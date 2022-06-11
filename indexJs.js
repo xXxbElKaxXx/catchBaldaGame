@@ -74,6 +74,9 @@ function startTimer() {
 
 function startGame() {
   audioStart.play();
+  settings.style.display = 'none';
+  rules.style.display = 'none';
+  finalAlert.style.display = 'none';
   countScore = 0;
   countCombo = 0;
   allCombos.length = 0;
