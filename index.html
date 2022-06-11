@@ -4,17 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game</title>
-  <link rel="icon" href="data:;base64,=">
   <link rel="stylesheet" href="styleIndex.css">
 </head>
 <body>
   <div class="fullPage">
     <div class="game">
       <div class="buttonMenu">
-        <input type="button" id="start" value="start | refresh">
-        <input type="button" id="stop" value="stop">
-        <input type="button" id="difficult" value="difficult">
-        <input type="button" id="buttonRules" value="rules">
+        <button id="buttonStart">start | refresh</button>
+        <button id="buttonStop">stop</button>
+        <button id="buttonSettings">
+          settings
+          <div class="settings" onclick="event.stopPropagation()">
+            <h3>Settings</h3>
+            <form>
+              <fieldset>
+                <legend>Timer:</legend>
+                <input type="radio" id="sec30" name="setTimer" value="30">
+                <label for="sec30">30sec</label><br>
+                <input type="radio" id="sec60" name="setTimer" value="60" checked>
+                <label for="sec60">60sec</label><br>
+                <input type="radio" id="sec180" name="setTimer" value="180">
+                <label for="sec180">180sec</label>
+              </fieldset>
+              <fieldset>
+                <legend>Speed:</legend>
+                <input type="radio" id="slowSpeed" name="setSpeed" value="800">
+                <label for="slowSpeed">easy</label><br>
+                <input type="radio" id="normalSpeed" name="setSpeed" value="500" checked>
+                <label for="normalSpeed">normal</label><br>
+                <input type="radio" id="fastSpeed" name="setSpeed" value="350">
+                <label for="fastSpeed">hard</label><br>
+                <input type="radio" id="nightmerSpeed" name="setSpeed" value="200">
+                <label for="nightmerSpeed">nightmer</label>
+              </fieldset>
+            </form>
+            <span id="settingsCross">[x]</span>
+          </div>
+        </button>
+        <button id="buttonRules">rules</button>
       </div>
       <div class="screen">
       </div>
@@ -23,28 +50,29 @@
         <input type="text" id="score" value="combo:  | score:" readonly>
       </div>
     </div>
-   <div class="rules">
-     <h2>My life - my rules</h2>
-     <p>Ну что бы тут могло быть не понятно...</p>
-     <p>По Полине жмёшь ЛКМ</p>
-     <p>По Вовану жмёшь ПКМ</p>
-     <p>Если играешь на телефоне -<br>стараешься не попасть по Вовану</p>
-     <p>Кнопка "difficult" пока отдыхает</p>
-     <p>Gl Hf</p>
-     <span id="rulesCross">[x]</span>
-   </div>
-   <div class="finalAlert">
-     <h2>Yo, you have a nice try</h2>
-     <p>Your score: <span id="alertScore"></span></p>
-     <p>Your max combo: <span id="alertCombo"></span></p>
-     <input type="button" id="buttonFinalAlert" value="Ok">
-   </div>
+    <div class="rules">
+      <h3>My life - my rules</h3>
+      <p>Ну что бы тут могло быть не понятно...</p>
+      <p>По Полине жмёшь ЛКМ</p>
+      <p>По Вовану жмёшь ПКМ</p>
+      <p>Если играешь на телефоне -<br>играй не на телефоне...<br>но можешь стараться не попасть по Вовану</p>
+      <p>Gl Hf</p>
+      <span id="rulesCross">[x]</span>
+    </div>
+    <div class="finalAlert">
+      <h2>Yo, you have a nice try</h2>
+      <p>difficult: <span id="alertDifficult"></span></p>
+      <p>score: <span id="alertScore"></span></p>
+      <p>max combo: <span id="alertCombo"></span></p>
+      <button id="buttonFinalAlert">Ok</button>
+    </div>
   </div>
   <div class="Audio">
     <audio src="click.mp3" id="audioClick"></audio>
     <audio src="miss.mp3" id="audioMiss"></audio>
     <audio src="start.mp3" id="audioStart"></audio>
     <audio src="rules.mp3" id="audioRules"></audio>
+    <audio src="settings.mp3" id="audioSettings"></audio>
   </div>
 
   <script src="indexJs.js"></script>
