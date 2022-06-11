@@ -7,6 +7,15 @@ buttonRules.onclick = function() {
 }
 rulesCross.onclick = () => rules.style.display = 'none';
 
+let settings = document.querySelector('.settings');
+let buttonSettings = document.getElementById('buttonSettings');
+let SettingsCross = document.getElementById('settingsCross');
+buttonSettings.onclick = function() {
+  settings.style.display = 'block';
+  audioSettings.play();
+}
+settingsCross.onclick = () => settings.style.display = 'none';
+
 let audioClick = document.getElementById('audioClick');
 audioClick.volume = 0.3;
 let audioMiss = document.getElementById('audioMiss');
@@ -15,14 +24,16 @@ let audioRules = document.getElementById('audioRules');
 audioRules.volume = 0.3;
 let audioStart = document.getElementById('audioStart');
 audioStart.volume = 0.3;
+let audioSettings = document.getElementById('audioSettings');
+audioSettings.volume = 0.3;
 
 let screen = document.querySelector('.screen');
 
-let start = document.getElementById('start');
-start.onclick = startGame;
+let buttonStart = document.getElementById('buttonStart');
+buttonStart.onclick = startGame;
 
-let stop = document.getElementById('stop');
-stop.onclick = stopGame;
+let buttonStop = document.getElementById('buttonStop');
+buttonStop.onclick = stopGame;
 
 let timer = document.getElementById('timer');
 let seconds = 0;
@@ -32,6 +43,14 @@ let countScore = 0;
 
 let allCombos = [];
 let countCombo = 0;
+
+let arraySetSpeed = document.getElementsByName('setSpeed');
+let arraySetTimer = document.getElementsByName('setTimer');
+function getCheckedRadio(array) {
+  for (let radio of array) {
+    if (radio.checked) return radio.value
+  }
+}
 
 document.oncontextmenu = function() {
   return false;
@@ -46,7 +65,7 @@ function getMaxOfArray(numArray) {
 }
 
 function startTimer() {
-  seconds = 60;
+  seconds = getCheckedRadio(arraySetTimer);
   window.timerIdTimer = setInterval(() => {
     seconds = seconds - 1;
     timer.value = `timer: ${seconds}`;
@@ -67,7 +86,7 @@ function startGame() {
       allCombos.push(countCombo);
       showFinalAlert();
     }
-  }, 500);
+  }, getCheckedRadio(arraySetSpeed));
 }
 
 function stopGame() {
@@ -141,4 +160,16 @@ function showFinalAlert() {
   finalAlert.style.display = 'block';
   alertScore.textContent = `${countScore}`;
   alertCombo.textContent = `${getMaxOfArray(allCombos)}`;
+  if (getCheckedRadio(arraySetSpeed) == 800) {
+    alertDifficult.textContent = `easy`;
+  }
+  if (getCheckedRadio(arraySetSpeed) == 500) {
+    alertDifficult.textContent = `normal`;
+  }
+  if (getCheckedRadio(arraySetSpeed) == 350) {
+    alertDifficult.textContent = `hard`;
+  }
+  if (getCheckedRadio(arraySetSpeed) == 200) {
+    alertDifficult.textContent = `nightmer`;
+  }
 }
