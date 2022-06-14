@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game</title>
+  <link rel="icon" href="data:;base64,=">
   <link rel="stylesheet" href="styleIndex.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
         <button id="buttonStop">stop</button>
         <button id="buttonSettings">
           settings
-          <div class="settings" onclick="event.stopPropagation()">
+          <div class="settings" event.stopPropagation()>
             <h3>Settings</h3>
             <form>
               <fieldset>
@@ -32,9 +33,9 @@
                 <label for="slowSpeed">easy</label><br>
                 <input type="radio" id="normalSpeed" name="setSpeed" value="500" checked>
                 <label for="normalSpeed">normal</label><br>
-                <input type="radio" id="fastSpeed" name="setSpeed" value="350">
+                <input type="radio" id="fastSpeed" name="setSpeed" value="400">
                 <label for="fastSpeed">hard</label><br>
-                <input type="radio" id="nightmerSpeed" name="setSpeed" value="200">
+                <input type="radio" id="nightmerSpeed" name="setSpeed" value="300">
                 <label for="nightmerSpeed">nightmer</label>
               </fieldset>
             </form>
@@ -53,14 +54,14 @@
     <div class="rules">
       <h3>My life - my rules</h3>
       <p>Ну что бы тут могло быть не понятно...</p>
-      <p>По Полине жмёшь ЛКМ</p>
-      <p>По Вовану жмёшь ПКМ</p>
-      <p>Если играешь на телефоне -<br>играй не на телефоне...<br>но можешь стараться не попасть по Вовану</p>
+      <p>По Полине жмёшь ЛКМ или клавишу X(Ч)</p>
+      <p>По Вовану жмёшь ПКМ или клавишу Z(Я)</p>
+      <p>Если играешь на телефоне - играй не на телефоне...</p>
       <p>Gl Hf</p>
-      <span id="rulesCross">[x]</span>
-    </div>
+      <span id="rulesCross" onclick="event.stopPropagation()">[x]</span>
     <div class="finalAlert">
       <h2>Yo, you have a nice try</h2>
+      <p>timer: <span id="alertTimer"></span></p>
       <p>difficult: <span id="alertDifficult"></span></p>
       <p>score: <span id="alertScore"></span></p>
       <p>max combo: <span id="alertCombo"></span></p>
