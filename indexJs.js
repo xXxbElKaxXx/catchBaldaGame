@@ -69,6 +69,7 @@ function getCheckedRadio(array) {
 }
 
 function startTimer() {
+  seconds = 3;
   seconds = getCheckedRadio(arraySetTimer);
   window.timerIdTimer = setInterval(() => {
     seconds--;
